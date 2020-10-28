@@ -48,9 +48,10 @@ def get_company_name(url):
 	response_code = send_request(url) 
 	content = response_code.content 
 	names = []
-	companies = re.findall('(?:alt=")(.*?)">', content)
+	companies = re.findall('(?:<strong class="c_identityChip-name">)(.*?)</strong>', content)
 	for line in companies: 
-		if target_cap not in line:
+		line = line.lower()
+		if target not in line:
 			if line not in names: 
 				names.append(line)
 	return names
